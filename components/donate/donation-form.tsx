@@ -68,9 +68,9 @@ export default function DonationForm({ onAmountChange, onFrequencyChange }: Dona
     onAmountChange(value)
   }
 
-  const handleFrequencyChange = (frequency: string) => {
-    setFormData((prev) => ({ ...prev, frequency: frequency as any }))
-    onFrequencyChange(frequency as "one-time" | "monthly" | "yearly")
+  const handleFrequencyChange = (frequency: "one-time" | "monthly" | "yearly") => {
+    setFormData((prev) => ({ ...prev, frequency }))
+    onFrequencyChange(frequency)
   }
 
   const handleInputChange = (field: keyof DonationFormData, value: string | boolean) => {

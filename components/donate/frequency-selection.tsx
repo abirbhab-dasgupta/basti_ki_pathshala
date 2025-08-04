@@ -3,15 +3,15 @@
 import { Gift, Heart, Star } from "lucide-react"
 
 interface FrequencySelectionProps {
-  selectedFrequency: string
-  onFrequencyChange: (frequency: string) => void
+  selectedFrequency: "one-time" | "monthly" | "yearly"
+  onFrequencyChange: (frequency: "one-time" | "monthly" | "yearly") => void
 }
 
 export default function FrequencySelection({ selectedFrequency, onFrequencyChange }: FrequencySelectionProps) {
   const frequencies = [
-    { value: "one-time", label: "One Time", icon: Gift },
-    { value: "monthly", label: "Monthly", icon: Heart },
-    { value: "yearly", label: "Yearly", icon: Star },
+    { value: "one-time" as const, label: "One Time", icon: Gift },
+    { value: "monthly" as const, label: "Monthly", icon: Heart },
+    { value: "yearly" as const, label: "Yearly", icon: Star },
   ]
 
   return (

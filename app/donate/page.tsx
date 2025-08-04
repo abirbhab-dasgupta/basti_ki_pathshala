@@ -26,7 +26,6 @@ interface DonationFormData {
 
 export default function DonatePage() {
   const [currentAmount, setCurrentAmount] = useState("")
-  const [currentFrequency, setCurrentFrequency] = useState<"one-time" | "monthly" | "yearly">("one-time")
   const [formData, setFormData] = useState<DonationFormData>({
     amount: "",
     customAmount: "",
@@ -44,17 +43,6 @@ export default function DonatePage() {
     agreeToTerms: false,
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const predefinedAmounts = [
-    { amount: "500", impact: "Provides books for 2 children" },
-    { amount: "1000", impact: "Sponsors meals for 10 children" },
-    { amount: "2500", impact: "Funds a teacher for 1 week" },
-    { amount: "5000", impact: "Supports a classroom for 1 month" },
-    { amount: "10000", impact: "Sponsors education for 5 children" },
-    { amount: "25000", impact: "Funds a complete learning center" },
-  ]
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -67,11 +55,6 @@ export default function DonatePage() {
     setFormData((prev) => ({ ...prev, amount, customAmount: "" }))
   }
 
-  const handleCustomAmount = (value: string) => {
-    setCurrentAmount("custom")
-    setFormData((prev) => ({ ...prev, customAmount: value, amount: "" }))
-  }
-
   const handleInputChange = (field: keyof DonationFormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
@@ -79,24 +62,6 @@ export default function DonatePage() {
   // Wrapper for frequency change
   const handleFrequencyChange = (value: "one-time" | "monthly" | "yearly") => {
     handleInputChange("frequency", value)
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    try {
-      // Simulate payment processing
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      console.log("Donation submitted:", formData)
-      // Here you would integrate with payment gateway
-      alert("Thank you for your donation! Redirecting to payment gateway...")
-    } catch (error) {
-      console.error("Donation error:", error)
-      alert("There was an error processing your donation. Please try again.")
-    } finally {
-      setIsSubmitting(false)
-    }
   }
 
   const getCurrentAmount = () => {
